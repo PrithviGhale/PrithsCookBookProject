@@ -1,22 +1,89 @@
+/* Base HTML/Responsive Settings */
 html {
-  font-size: 14px;
+    position: relative;
+    min-height: 100%;
+    font-size: 14px; /* Base font size for mobile */
+    scroll-behavior: smooth; /* Smooth scrolling */
 }
 
+/* Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px; /* Larger base font for desktop */
+    }
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+/* Focus states for better accessibility */
+.btn:focus,
+.btn:active:focus,
+.btn-link.nav-link:focus,
+.form-control:focus,
+.form-check-input:focus {
+    box-shadow: 0 0 0 0.2rem rgba(37, 140, 251, 0.25); /* More visible focus ring */
+    outline: none; /* Remove default outline */
 }
 
-html {
-  position: relative;
-  min-height: 100%;
-}
-
+/* Body Styling */
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px; /* Keep footer space */
+    line-height: 1.6; /* Better readability */
+    color: #333; /* Default text color */
+    background-color: #f8f9fa; /* Light background */
+    -webkit-font-smoothing: antialiased; /* Better font rendering */
+}
+
+/* Improved Utility Classes */
+.container {
+    max-width: 1140px; /* Better max-width for content */
+    padding: 0 1.5rem; /* Responsive padding */
+}
+
+/* Add these new styles for better spacing */
+.main-content {
+    padding: 2rem 0;
+}
+
+/* Responsive Margins */
+@media (max-width: 767px) {
+    body {
+        margin-bottom: 40px; /* Smaller footer space on mobile */
+    }
+}
+
+/* Hero Section */
+.hero-section {
+    background: linear-gradient(45deg, #2c3e50, #3498db);
+    padding: 4rem 0;
+    margin-top: -2rem;
+    border-bottom: 4px solid #2980b9;
+}
+
+/* Feature Cards */
+.feature-card {
+    background: rgba(255, 255, 255, 0.95);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+    .feature-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+/* Button Enhancements */
+.btn-lg {
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    border-radius: 50px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .hero-section {
+        padding: 2rem 0;
+    }
+
+    .feature-card {
+        margin-bottom: 1rem;
+    }
 }

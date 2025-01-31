@@ -1,17 +1,33 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using MyCookBookApi.Models;
 
-[Route("api/[controller]")]
-[ApiController]
-public class RecipeController : ControllerBase
+namespace MyCookBookApi.Controllers
 {
-    [HttpGet]
-    public IActionResult GetRecipes()
+    [Route("api/[controller]")]
+    [ApiController]
+    public class RecipeController : ControllerBase
     {
-        return Ok(new List<Recipe>
+        [HttpGet]
+        public IActionResult GetRecipes()
         {
-            new Recipe { Name = "Pasta", Ingredients = new List<string> { "Pasta", "Tomato Sauce" }, Steps = "Boil pasta." },
-            new Recipe { Name = "Salad", Ingredients = new List<string> { "Lettuce", "Tomatoes" }, Steps = "Mix all ingredients." }
-        });
+            var recipes = new List<Recipe>
+            {
+                new Recipe
+                {
+                    Name = "Pasta",
+                    Ingredients = new List<string> { "Tomato Sauce", "Pasta", "Cheese" },
+                    Steps = "Boil pasta and mix with sauce."
+                },
+                new Recipe
+                {
+                    Name = "Salad",
+                    Ingredients = new List<string> { "Lettuce", "Tomatoes", "Olive Oil" },
+                    Steps = "Chop ingredients and mix."
+                }
+            };
+
+            return Ok(recipes);
+        }
     }
 }
