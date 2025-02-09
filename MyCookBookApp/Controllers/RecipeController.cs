@@ -11,7 +11,6 @@ namespace MyCookBookApp.Controllers
     {
         private readonly HttpClient _httpClient;
 
-        
         public RecipeController(IHttpClientFactory httpClientFactory)
         {
             _httpClient = httpClientFactory.CreateClient();
@@ -21,7 +20,7 @@ namespace MyCookBookApp.Controllers
         {
             try
             {
-                var apiBaseUrl = "https://localhost:7238"; 
+                var apiBaseUrl = "https://localhost:7238";
                 var response = await _httpClient.GetStringAsync($"{apiBaseUrl}/api/Recipe");
 
                 var recipes = JsonSerializer.Deserialize<List<Recipe>>(response, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
@@ -30,7 +29,24 @@ namespace MyCookBookApp.Controllers
             }
             catch
             {
-                return View(new List<Recipe>()); // Returns empty list if API call fails
+                return View(new List<Recipe>());
+            }
+        }
+
+        public async Task<IActionResult> Search(string query)
+        {
+            try
+            {
+                var apiBaseUrl = "https://localhost:7238";
+                var response = await _httpClient.GetStringAsync($"{apiBaseUrl}/api/Recipe/search?query={query}");
+
+                var recipes = JsonSerializer.Deserialize<List<Recipe>>(response, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+                return View("Index", recipes ?? new List<Recipe>());
+            }
+            catch
+            {
+                return View("Index", new List<Recipe>());
             }
         }
     }
