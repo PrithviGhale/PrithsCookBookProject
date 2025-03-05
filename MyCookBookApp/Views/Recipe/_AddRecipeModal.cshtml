@@ -1,0 +1,64 @@
+﻿<div class="modal fade" id="addRecipeModal" tabindex="-1" aria-labelledby="addRecipeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="addRecipeModalLabel">Add New Recipe</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="modal-body">
+                <form id="addRecipeForm">
+                    <!-- Recipe Name -->
+                    <div class="mb-3">
+                        <label for="recipeName" class="form-label">Recipe Name</label>
+                        <input type="text" class="form-control" id="recipeName" required>
+                    </div>
+
+                    <!-- Tagline -->
+                    <div class="mb-3">
+                        <label for="tagLine" class="form-label">Tagline</label>
+                        <input type="text" class="form-control" id="tagLine">
+                    </div>
+
+                    <!-- Summary -->
+                    <div class="mb-3">
+                        <label for="summary" class="form-label">Summary</label>
+                        <textarea class="form-control" id="summary" rows="3"></textarea>
+                    </div>
+
+                    <!-- Ingredients -->
+                    <div class="mb-3">
+                        <label for="ingredients" class="form-label">Ingredients (comma-separated)</label>
+                        <textarea class="form-control" id="ingredients" rows="3" required></textarea>
+                    </div>
+
+                    <!-- Instructions -->
+                    <div class="mb-3">
+                        <label for="instructions" class="form-label">Instructions (one per line)</label>
+                        <textarea class="form-control" id="instructions" rows="5" required></textarea>
+                    </div>
+
+                    <!-- Categories -->
+                    <div class="mb-3">
+                        <label for="categories" class="form-label">Categories</label>
+                        <select class="form-select" id="categories" multiple>
+                            <option value="Breakfast">Breakfast</option>
+                            <option value="Lunch">Lunch</option>
+                            <option value="Dinner">Dinner</option>
+                            <option value="Dessert">Dessert</option>
+                            <option value="Snack">Snack</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="saveRecipe">Save Recipe</button>
+            </div>
+        </div>
+    </div>
+</div>

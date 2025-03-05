@@ -1,89 +1,54 @@
-/* Base HTML/Responsive Settings */
-html {
-    position: relative;
-    min-height: 100%;
-    font-size: 14px; /* Base font size for mobile */
-    scroll-behavior: smooth; /* Smooth scrolling */
+/* Add Recipe Modal Styles */
+#addRecipeModal .modal-content {
+    border-radius: 10px;
 }
 
-/* Medium devices (tablets, 768px and up) */
-@media (min-width: 768px) {
-    html {
-        font-size: 16px; /* Larger base font for desktop */
-    }
+#addRecipeModal .modal-header {
+    background-color: #007bff;
+    color: white;
+    border-radius: 10px 10px 0 0;
 }
 
-/* Focus states for better accessibility */
-.btn:focus,
-.btn:active:focus,
-.btn-link.nav-link:focus,
-.form-control:focus,
-.form-check-input:focus {
-    box-shadow: 0 0 0 0.2rem rgba(37, 140, 251, 0.25); /* More visible focus ring */
-    outline: none; /* Remove default outline */
+#addRecipeModal .modal-body {
+    padding: 20px;
 }
 
-/* Body Styling */
-body {
-    margin-bottom: 60px; /* Keep footer space */
-    line-height: 1.6; /* Better readability */
-    color: #333; /* Default text color */
-    background-color: #f8f9fa; /* Light background */
-    -webkit-font-smoothing: antialiased; /* Better font rendering */
+#addRecipeModal .form-label {
+    font-weight: bold;
 }
 
-/* Improved Utility Classes */
-.container {
-    max-width: 1140px; /* Better max-width for content */
-    padding: 0 1.5rem; /* Responsive padding */
+#addRecipeModal .form-control {
+    margin-bottom: 15px;
 }
 
-/* Add these new styles for better spacing */
-.main-content {
-    padding: 2rem 0;
+#addRecipeModal .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
 }
 
-/* Responsive Margins */
-@media (max-width: 767px) {
-    body {
-        margin-bottom: 40px; /* Smaller footer space on mobile */
-    }
+/* Recipe Card Styles */
+.card {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    transition: transform 0.2s;
 }
 
-/* Hero Section */
-.hero-section {
-    background: linear-gradient(45deg, #2c3e50, #3498db);
-    padding: 4rem 0;
-    margin-top: -2rem;
-    border-bottom: 4px solid #2980b9;
-}
-
-/* Feature Cards */
-.feature-card {
-    background: rgba(255, 255, 255, 0.95);
-    transition: all 0.3s ease;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-    .feature-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    .card:hover {
+        transform: scale(1.02);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
 
-/* Button Enhancements */
-.btn-lg {
-    padding: 1rem 2rem;
-    font-size: 1.1rem;
-    border-radius: 50px;
+.card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
 }
 
-/* Responsive Adjustments */
-@media (max-width: 768px) {
-    .hero-section {
-        padding: 2rem 0;
-    }
+.card-text {
+    font-size: 0.9rem;
+    color: #555;
+}
 
-    .feature-card {
-        margin-bottom: 1rem;
-    }
+.list-group-item {
+    border: none;
+    padding: 0.5rem 1rem;
 }

@@ -1,35 +1,31 @@
-﻿@model List<MyCookBookApp.Models.Recipe>
-
-<div class="container mt-5">
+﻿<div class="container mt-5">
     <h1 class="text-center mb-4">🍲 Recipe List</h1>
-    <div class="row">
-        @foreach (var recipe in Model)
-        {
-            <div class="col-md-6 col-lg-4">
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-body">
-                        <h5 class="card-title">@recipe.Name</h5>
 
-                        <h6 class="text-muted">Ingredients:</h6>
-                        <ul class="list-group list-group-flush">
-                            @if (recipe.Ingredients != null && recipe.Ingredients.Any())
-                            {
-                                @foreach (var ingredient in recipe.Ingredients)
-                                {
-                                    <li class="list-group-item">@ingredient</li>
-                                }
-                            }
-                            else
-                            {
-                                <li class="list-group-item text-muted">No ingredients available</li>
-                            }
-                        </ul>
+    <!-- Add Recipe Button -->
+    <div class="text-end mb-4">
+        <button id="addRecipeBtn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addRecipeModal">
+            Add Recipe
+        </button>
+    </div>
 
-                        <h6 class="mt-3">Steps:</h6>
-                        <p class="card-text">@(!string.IsNullOrEmpty(recipe.Steps) ? recipe.Steps : "No steps provided")</p>
-                    </div>
-                </div>
-            </div>
-        }
+    <!-- Search Bar -->
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <input type="text" id="searchInput" class="form-control" placeholder="Search recipes...">
+        </div>
+        <div class="col-md-4">
+            <button id="searchButton" class="btn btn-success w-100">Search</button>
+        </div>
+    </div>
+
+    <!-- Recipe Cards -->
+    <div class="row" id="recipeCards">
+        <!-- Pre-added recipes will be displayed here -->
     </div>
 </div>
+
+<!-- Include the Add Recipe Modal -->
+@Html.Partial("_AddRecipeModal")
+
+<!-- Include the JavaScript for Recipe Interactions -->
+<script src="/js/recipes.js"></script>

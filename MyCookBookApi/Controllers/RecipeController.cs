@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System.Linq;
 using MyCookBookApi.Models;
+using MyCookBookApi.Services;
+using System.Collections.Generic;
 
 namespace MyCookBookApi.Controllers
 {
@@ -9,43 +9,54 @@ namespace MyCookBookApi.Controllers
     [ApiController]
     public class RecipeController : ControllerBase
     {
-        private readonly List<Recipe> _recipes = new List<Recipe>
-        {
-            new Recipe
-            {
-                Name = "Pasta",
-                Ingredients = new List<string> { "Tomato Sauce", "Pasta", "Cheese" },
-                Steps = "Boil pasta and mix with sauce."
-            },
-            new Recipe
-            {
-                Name = "Salad",
-                Ingredients = new List<string> { "Lettuce", "Tomatoes", "Olive Oil" },
-                Steps = "Chop ingredients and mix."
-            }
-        };
+        private readonly IRecipeService _recipeService;
 
-        [HttpGet]
-        public IActionResult GetRecipes()
+        public RecipeController(IRecipeService recipeService)
         {
-            return Ok(_recipes);
+            _recipeService = recipeService;
         }
 
-        [HttpGet("search")]
-        public IActionResult SearchRecipes([FromQuery] string query)
+        [HttpGet]
+        public ActionResult<IEnumerable<Recipe>> GetAllRecipes()
         {
-            if (string.IsNullOrWhiteSpace(query))
+            return Ok(_recipeService.GetAllRecipes());
+        }
+
+        [HttpGet("{id}")]
+        public ActionResult<Recipe> GetRecipeById(string id)
+        {
+            var recipe = _recipeService.GetRecipeById(id);
+            if (recipe == null)
             {
-                return Ok(_recipes); // Return all recipes if no query is provided
+                return NotFound();
+            }
+            return Ok(recipe);
+        }
+
+        [HttpPost("search")]
+        public ActionResult<IEnumerable<Recipe>> SearchRecipes([FromBody] RecipeSearchRequest searchRequest)
+        {
+            if (searchRequest == null || string.IsNullOrWhiteSpace(searchRequest.Keyword))
+            {
+                return BadRequest("Invalid search request.");
             }
 
-            var matchingRecipes = _recipes
-                .Where(r => r.Name.Contains(query, StringComparison.OrdinalIgnoreCase) ||
-                            r.Ingredients.Any(i => i.Contains(query, StringComparison.OrdinalIgnoreCase)) ||
-                            r.Steps.Contains(query, StringComparison.OrdinalIgnoreCase))
-                .ToList();
+            searchRequest.Categories ??= new List<CategoryType>();
+            var recipes = _recipeService.SearchRecipes(searchRequest);
+            return Ok(recipes);
+        }
 
-            return Ok(matchingRecipes);
+        [HttpPost]
+        public ActionResult<Recipe> CreateRecipe([FromBody] Recipe recipe)
+        {
+            if (recipe == null || string.IsNullOrWhiteSpace(recipe.Name))
+            {
+                return BadRequest("Invalid recipe data.");
+            }
+
+            recipe.RecipeId = Guid.NewGuid().ToString();
+            _recipeService.AddRecipe(recipe);
+            return CreatedAtAction(nameof(GetRecipeById), new { id = recipe.RecipeId }, recipe);
         }
     }
 }

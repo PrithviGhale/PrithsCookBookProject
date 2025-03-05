@@ -16,6 +16,7 @@ namespace MyCookBookApp.Controllers
             _httpClient = httpClientFactory.CreateClient();
         }
 
+        // Display all recipes
         public async Task<IActionResult> Index()
         {
             try
@@ -33,6 +34,7 @@ namespace MyCookBookApp.Controllers
             }
         }
 
+        // Search for recipes
         public async Task<IActionResult> Search(string query)
         {
             try
@@ -47,6 +49,32 @@ namespace MyCookBookApp.Controllers
             catch
             {
                 return View("Index", new List<Recipe>());
+            }
+        }
+
+        // Add a new recipe
+        [HttpPost]
+        public async Task<IActionResult> AddRecipe(Recipe recipe)
+        {
+            try
+            {
+                var apiBaseUrl = "https://localhost:7238";
+                var content = new StringContent(JsonSerializer.Serialize(recipe), System.Text.Encoding.UTF8, "application/json");
+                var response = await _httpClient.PostAsync($"{apiBaseUrl}/api/Recipe", content);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    // Handle error
+                    return View("Error");
+                }
+            }
+            catch
+            {
+                return View("Error");
             }
         }
     }
