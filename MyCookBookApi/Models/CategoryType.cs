@@ -1,17 +1,13 @@
-﻿namespace MyCookBookApi.Models
+﻿using System.Text.Json.Serialization;
+
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum CategoryType
 {
-    public enum CategoryType
-    {
-        Breakfast,
-        Lunch,
-        Dinner,
-        Dessert,
-        Snack,
-        Vegan,
-        Vegetarian,
-        GlutenFree,
-        Keto,
-        LowCarb,
-        HighProtein
-    }
+    Breakfast,
+    Lunch,
+    Dinner,
+    Dessert,
+    Snack,
+    Vegan,
+    Vegetarian
 }

@@ -13,12 +13,12 @@ namespace MyCookBookApi.Tests
             {
                 Name = "Pasta",
                 Ingredients = new List<string> { "Pasta", "Tomato Sauce" },
-                Steps = "Boil pasta."
+                Instructions = new List<string> { "Boil pasta." }
             };
 
             Assert.Equal("Pasta", recipe.Name);
             Assert.Contains("Tomato Sauce", recipe.Ingredients);
-            Assert.Equal("Boil pasta.", recipe.Steps);
+            Assert.Contains("Boil pasta.", recipe.Instructions);
         }
     }
 }

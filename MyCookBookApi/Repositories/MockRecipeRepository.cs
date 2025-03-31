@@ -55,7 +55,7 @@ namespace MyCookBookApi.Repositories
                      r.Name.Contains(searchRequest.Keyword, StringComparison.OrdinalIgnoreCase) ||
                      r.Summary.Contains(searchRequest.Keyword, StringComparison.OrdinalIgnoreCase)) &&
                     ((searchRequest.Categories == null || searchRequest.Categories.Count == 0) ||
-                     r.Categories.Any(c => searchRequest.Categories.Contains(c)))
+                     r.Categories.Any(c => searchRequest.Categories.Contains(c.ToString(), StringComparer.OrdinalIgnoreCase)))
                 )
                 .ToList();
         }

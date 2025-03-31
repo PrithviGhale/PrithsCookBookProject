@@ -1,54 +1,47 @@
-﻿/* Add Recipe Modal Styles */
-#addRecipeModal.modal - content {
+﻿/* Edit Recipe Modal Styles */
+#editRecipeModal.modal - content {
     border - radius: 10px;
 }
 
-#addRecipeModal.modal - header {
-    background - color: #007bff;
-    color: white;
+#editRecipeModal.modal - header {
+    background - color: #ffc107; /* Yellow header for Edit Modal */
+    color: black; /* Black text for better contrast */
     border - radius: 10px 10px 0 0;
 }
 
-#addRecipeModal.modal - body {
+#editRecipeModal.modal - body {
     padding: 20px;
 }
 
-#addRecipeModal.form - label {
+#editRecipeModal.form - label {
     font - weight: bold;
 }
 
-#addRecipeModal.form - control {
+#editRecipeModal.form - control {
     margin - bottom: 15px;
 }
 
-#addRecipeModal.btn - primary {
-    background - color: #007bff;
-    border - color: #007bff;
+#editRecipeModal.btn - warning {
+    background - color: #ffc107; /* Yellow button for Edit Modal */
+    border - color: #ffc107;
+    color: black;
 }
 
-/* Recipe Card Styles */
-.card {
+/* Dropdown Styles for Categories */
+#editRecipeModal.dropdown - menu {
+    max - height: 200px;
+    overflow - y: auto;
+}
+
+#editRecipeModal.dropdown - item.active {
+    background - color: #ffc107;
+    color: black;
+}
+
+/* Full Width Section for Instructions */
+#editRecipeModal.full - width - section {
+    margin - top: 20px;
+    padding: 15px;
     border: 1px solid #ddd;
-    border - radius: 10px;
-    transition: transform 0.2s;
-}
-
-.card:hover {
-    transform: scale(1.02);
-    box - shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.card - title {
-    font - size: 1.25rem;
-    font - weight: bold;
-}
-
-.card - text {
-    font - size: 0.9rem;
-    color: #555;
-}
-
-.list - group - item {
-    border: none;
-    padding: 0.5rem 1rem;
+    border - radius: 5px;
 }

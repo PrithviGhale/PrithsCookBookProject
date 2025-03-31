@@ -1,31 +1,128 @@
-﻿<div class="container mt-5">
-    <h1 class="text-center mb-4">🍲 Recipe List</h1>
+﻿@{
+    ViewData["Title"] = "MyCookBook Recipes";
+}
 
-    <!-- Add Recipe Button -->
-    <div class="text-end mb-4">
-        <button id="addRecipeBtn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addRecipeModal">
-            Add Recipe
-        </button>
-    </div>
+<div class="container mt-5">
+    <h1 class="text-center mb-5 display-5">🍽️ MyCookBook Recipes</h1>
 
-    <!-- Search Bar -->
-    <div class="row mb-4">
+    <!-- Search & Add -->
+    <div class="row mb-4 align-items-center">
         <div class="col-md-8">
             <input type="text" id="searchInput" class="form-control" placeholder="Search recipes...">
         </div>
-        <div class="col-md-4">
-            <button id="searchButton" class="btn btn-success w-100">Search</button>
+        <div class="col-md-2 mt-2 mt-md-0">
+            <button id="searchButton" class="btn btn-outline-primary w-100">
+                🔍 Search
+            </button>
+        </div>
+        <div class="col-md-2 mt-2 mt-md-0">
+            <button id="addRecipeBtn" class="btn btn-success w-100" data-bs-toggle="modal" data-bs-target="#addRecipeModal">
+                ➕ Add Recipe
+            </button>
         </div>
     </div>
 
     <!-- Recipe Cards -->
-    <div class="row" id="recipeCards">
-        <!-- Pre-added recipes will be displayed here -->
+    <div class="row g-4" id="recipeCards">
+        <!-- JavaScript will inject recipe cards here -->
     </div>
 </div>
 
-<!-- Include the Add Recipe Modal -->
-@Html.Partial("_AddRecipeModal")
+<!-- Add Recipe Modal -->
+<div class="modal fade" id="addRecipeModal" tabindex="-1" aria-labelledby="addRecipeModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="addRecipeForm">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addRecipeModalLabel">Add Recipe</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="recipeName" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="recipeName" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="tagLine" class="form-label">Tagline</label>
+                        <input type="text" class="form-control" id="tagLine">
+                    </div>
+                    <div class="mb-3">
+                        <label for="summary" class="form-label">Summary</label>
+                        <textarea class="form-control" id="summary"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="ingredients" class="form-label">Ingredients (comma separated)</label>
+                        <input type="text" class="form-control" id="ingredients">
+                    </div>
+                    <div class="mb-3">
+                        <label for="instructions" class="form-label">Instructions (one per line)</label>
+                        <textarea class="form-control" id="instructions" rows="3"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="categories" class="form-label">Categories (multi-select)</label>
+                        <select multiple class="form-control" id="categories">
+                            <option>Dessert</option>
+                            <option>Dinner</option>
+                            <option>Lunch</option>
+                            <option>Vegan</option>
+                            <option>Snack</option>
+                            <option>Mexican</option>
+                            <option>Spicy</option>
+                            <option>Drink</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="saveRecipe" class="btn btn-primary">Save Recipe</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
-<!-- Include the JavaScript for Recipe Interactions -->
+<!-- Edit Recipe Modal -->
+<div class="modal fade" id="editRecipeModal" tabindex="-1" aria-labelledby="editRecipeModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="editRecipeForm">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editRecipeModalLabel">Edit Recipe</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="editRecipeId">
+                    <div class="mb-3">
+                        <label for="editRecipeName" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="editRecipeName" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editTagLine" class="form-label">Tagline</label>
+                        <input type="text" class="form-control" id="editTagLine">
+                    </div>
+                    <div class="mb-3">
+                        <label for="editSummary" class="form-label">Summary</label>
+                        <textarea class="form-control" id="editSummary"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editIngredients" class="form-label">Ingredients (comma separated)</label>
+                        <input type="text" class="form-control" id="editIngredients">
+                    </div>
+                    <div class="mb-3">
+                        <label for="editInstructions" class="form-label">Instructions (one per line)</label>
+                        <textarea class="form-control" id="editInstructions" rows="3"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editCategories" class="form-label">Categories (comma separated)</label>
+                        <input type="text" class="form-control" id="editCategories">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="updateRecipe" class="btn btn-primary">Update</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Link to JavaScript -->
 <script src="/js/recipes.js"></script>

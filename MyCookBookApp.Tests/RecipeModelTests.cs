@@ -13,12 +13,12 @@ namespace MyCookBookApp.Tests
             {
                 Name = "Salad",
                 Ingredients = new List<string> { "Lettuce", "Tomatoes", "Dressing" },
-                Steps = "Mix ingredients together."
+                Instructions = new List<string> { "Mix ingredients together." }
             };
 
             Assert.Equal("Salad", recipe.Name);
             Assert.Contains("Tomatoes", recipe.Ingredients);
-            Assert.Equal("Mix ingredients together.", recipe.Steps);
+            Assert.Contains("Mix ingredients together.", recipe.Instructions);
         }
     }
 }
